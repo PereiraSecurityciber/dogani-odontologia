@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..500&family=Jost:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=11">
 <link rel="preload" as="image" href="img/logo-dogani.png">
 <script type="application/ld+json">
 {
@@ -217,6 +217,21 @@
     </div>
   </section>
 
+  <!-- EQUIPE (foto real do Instagram @doganiodontologia, set/2025) -->
+  <section class="team" id="equipe" aria-labelledby="e-title">
+    <div class="wrap team-inner">
+      <div class="team-copy">
+        <h2 id="e-title">Nossa equipe</h2>
+        <p>Dentistas e equipe de apoio trabalhando juntos para que cada visita seja leve, do primeiro “bom dia” na recepção ao fim do tratamento.</p>
+        <a class="btn btn-gold" href="#agendar">Agendar com a equipe</a>
+      </div>
+      <figure class="team-photo">
+        <img src="img/equipe-dogani-800.webp" srcset="img/equipe-dogani-800.webp 800w, img/equipe-dogani.webp 1440w" sizes="(max-width: 900px) 92vw, 58vw" width="1440" height="1252" loading="lazy" alt="Equipe da Dogani Odontologia reunida na recepção do consultório, todos com camisa preta com a logo dourada">
+        <figcaption>Equipe Dogani na recepção do consultório</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- O CONSULTÓRIO -->
   <section class="section space" id="consultorio" aria-labelledby="c-title">
     <div class="wrap">
@@ -310,6 +325,45 @@
         <li><h3>Faça sua avaliação</h3><p>A Dra. Bruna examina, tira suas dúvidas e apresenta as opções para o seu caso.</p></li>
         <li><h3>Receba seu plano</h3><p>Você conhece cada etapa do tratamento antes de decidir começar.</p></li>
       </ol>
+
+      <form class="book" id="agendar" data-book novalidate aria-labelledby="book-title">
+        <div class="book-head">
+          <h3 id="book-title">Pré-agendamento em 30 segundos</h3>
+          <p>Preencha e a mensagem já chega pronta no WhatsApp da clínica. Nada fica salvo neste site.</p>
+        </div>
+        <div class="book-grid">
+          <label class="book-field">
+            <span>Seu nome</span>
+            <input name="nome" type="text" autocomplete="given-name" maxlength="60" required placeholder="Como podemos te chamar?">
+          </label>
+          <label class="book-field">
+            <span>Tratamento</span>
+            <select name="tratamento" data-book-tr>
+              <option>Avaliação geral</option>
+              <option>Clínica geral e check-up</option>
+              <option>Clareamento em consultório</option>
+              <option>Facetas dentárias</option>
+              <option>Alinhadores invisíveis</option>
+              <option>Ortodontia e ortopedia funcional</option>
+              <option>Implantes dentários</option>
+              <option>Atendimento infantil</option>
+            </select>
+          </label>
+          <fieldset class="book-field book-chips">
+            <legend>Melhor período</legend>
+            <label><input type="radio" name="periodo" value="Manhã" checked><span>Manhã</span></label>
+            <label><input type="radio" name="periodo" value="Tarde"><span>Tarde</span></label>
+            <label><input type="radio" name="periodo" value="Qualquer horário"><span>Tanto faz</span></label>
+          </fieldset>
+          <fieldset class="book-field book-chips">
+            <legend>Atendimento</legend>
+            <label><input type="radio" name="plano" value="Particular" checked><span>Particular</span></label>
+            <label><input type="radio" name="plano" value="Convênio Amil"><span>Amil</span></label>
+          </fieldset>
+        </div>
+        <p class="book-error" role="alert" hidden>Digite seu nome para continuar.</p>
+        <button class="btn btn-gold" type="submit">Enviar pelo WhatsApp</button>
+      </form>
     </div>
   </section>
 
@@ -357,8 +411,11 @@
         </dl>
         <div class="actions">
           <a class="btn btn-wine" data-wa="Olá! Gostaria de agendar uma avaliação na Dogani Odontologia." href="https://wa.me/5511996848349">Agendar pelo WhatsApp</a>
-          <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Goi%C3%A1s,+2909+-+Barcelona,+S%C3%A3o+Caetano+do+Sul+-+SP,+09550-051" target="_blank" rel="noopener">Traçar rota</a>
+          <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Goi%C3%A1s,+2909+-+Barcelona,+S%C3%A3o+Caetano+do+Sul+-+SP,+09550-051" target="_blank" rel="noopener">Google Maps</a>
+          <a class="btn btn-line" href="https://waze.com/ul?q=Av.%20Goi%C3%A1s%2C%202909%2C%20S%C3%A3o%20Caetano%20do%20Sul&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
+          <button class="btn btn-line" type="button" data-copy="Av. Goiás, 2909, Barcelona, São Caetano do Sul - SP, 09550-051">Copiar endereço</button>
         </div>
+        <p class="copy-ok" role="status" aria-live="polite"></p>
       </div>
       <div class="map">
         <iframe title="Mapa: Dogani Odontologia, Av. Goiás, 2909, São Caetano do Sul" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
@@ -393,6 +450,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Rota</a>
 </nav>
 
-<script src="script.js?v=6" defer></script>
+<button class="to-top" type="button" data-top aria-label="Voltar ao topo" hidden>↑</button>
+<script src="script.js?v=7" defer></script>
 </body>
 </html>

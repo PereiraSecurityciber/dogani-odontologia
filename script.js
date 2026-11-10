@@ -94,6 +94,64 @@
     lb.addEventListener('close', function () { if (opener) opener.focus(); });
   }
 
+  // Pre-booking form: builds the WhatsApp message locally; nothing is sent to or stored by this site.
+  var book = document.querySelector('[data-book]');
+  if (book) {
+    var err = book.querySelector('.book-error');
+    book.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nome = book.elements.nome.value.replace(/\s+/g, ' ').trim().slice(0, 60);
+      if (!nome) { err.hidden = false; book.elements.nome.focus(); return; }
+      err.hidden = true;
+      var msg = 'Olá! Meu nome é ' + nome + '. Gostaria de agendar: ' + book.elements.tratamento.value +
+        '. Melhor período: ' + book.elements.periodo.value + '. Atendimento: ' + book.elements.plano.value + '.';
+      if (book.elements.plano.value.indexOf('Amil') !== -1) msg += ' Posso enviar a foto da carteirinha.';
+      window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+    book.elements.nome.addEventListener('input', function () { err.hidden = true; });
+  }
+
+  // Treatment panels: "pre-book this" preselects the treatment in the form.
+  if (book) {
+    document.querySelectorAll('.tr-panel').forEach(function (panel) {
+      var h = panel.querySelector('h3');
+      if (!h) return;
+      var a = document.createElement('a');
+      a.className = 'tr-book';
+      a.href = '#agendar';
+      a.setAttribute('data-book-pick', h.textContent.trim());
+      a.textContent = 'ou pré-agende pelo formulário';
+      panel.appendChild(a);
+    });
+  }
+  document.querySelectorAll('[data-book-pick]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var sel = book && book.querySelector('[data-book-tr]');
+      if (sel) sel.value = a.getAttribute('data-book-pick');
+    });
+  });
+
+  // Copy address to clipboard.
+  var copyBtn = document.querySelector('[data-copy]');
+  var copyOk = document.querySelector('.copy-ok');
+  if (copyBtn && navigator.clipboard) {
+    copyBtn.addEventListener('click', function () {
+      navigator.clipboard.writeText(copyBtn.getAttribute('data-copy')).then(function () {
+        copyOk.textContent = 'Endereço copiado.';
+        setTimeout(function () { copyOk.textContent = ''; }, 2500);
+      });
+    });
+  } else if (copyBtn) {
+    copyBtn.hidden = true;
+  }
+
+  // Back to top.
+  var toTop = document.querySelector('[data-top]');
+  if (toTop) {
+    window.addEventListener('scroll', function () { toTop.hidden = window.scrollY < 900; }, { passive: true });
+    toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+
   var ano = document.getElementById('ano');
   if (ano) ano.textContent = String(new Date().getFullYear());
 })();
